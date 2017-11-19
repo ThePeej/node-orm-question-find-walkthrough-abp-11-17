@@ -29,6 +29,23 @@ class Question{
     })
   }
 
+  static Find(id){
+    const sql = `SELECT * FROM users WHERE id = ? LIMIT 1`
+ 
+    console.log(`Querying for user id ${id}...`)
+ 
+    return new Promise(function(resolve){
+      db.get(sql, [id], function(err, resultRow){
+        console.log(`...found ${JSON.stringify(resultRow)}!`)
+ 
+        const user = new User(resultRow.name, resultRow.age)
+        user.id = resultRow.id
+ 
+        resolve(user)        
+      })
+    })  
+  }
+
 }
 
 module.exports = Question;
