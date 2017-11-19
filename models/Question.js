@@ -30,7 +30,7 @@ class Question{
   }
 
   static Find(id){
-    const sql = `SELECT * FROM users WHERE id = ? LIMIT 1`
+    const sql = `SELECT * FROM questions WHERE id = ? LIMIT 1`
 
     console.log(`Querying for user id ${id}...`)
 
@@ -38,7 +38,7 @@ class Question{
       db.get(sql, [id], function(err, resultRow){
         console.log(`...found ${JSON.stringify(resultRow)}!`)
 
-        const question = new question(resultRow.name)
+        const question = new Question(resultRow.name)
         question.id = resultRow.id
 
         resolve(question)
