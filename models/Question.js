@@ -33,7 +33,7 @@ class Question{
     const sql = `SELECT * FROM questions WHERE id = ? LIMIT 1`
     return new Promise(function(resolve){
       db.get(sql, [id], function(err, resultRow){
-        const question = new Question()
+        const question = new Question(resultRow.content)
         question.id = resultRow.id
 
         resolve(question)
